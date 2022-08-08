@@ -3,7 +3,12 @@
 #include <vector>
 using std::string;
 using std::vector;
-class Bjj
+class AbstarctPlayer
+{ // abstract class
+  // serve as contract
+    virtual void Promotion() = 0;
+};
+class Bjj : AbstarctPlayer
 {
 protected:
 private:
@@ -20,14 +25,43 @@ public:
     bool End_Game(vector<string>);
     void setName(string); // Set method
     string getName();
+    void setBelt(string); // Set method
+    string getBelt();
+    void Promotion()
+    {
+        if (Belt == "Brown")
+        {
+            std::cout << Name << "Got Promoted!" << std::endl;
+        }
+        else
+        {
+            std::cout << Name << "Not Promoted :(" << std::endl;
+        }
+    }
 };
 
-
-void Bjj::setName(string name){
+void Bjj::setName(string name)
+{
     Name = name;
 }
-string Bjj::getName(){
+string Bjj::getName()
+{
     return Name;
+}
+void Bjj::setBelt(string belt)
+{
+    if (belt == "Black")
+        Belt = "Black";
+    if (belt == "Blue")
+        Belt = "Blue";
+    if (belt == "Purple")
+        Belt = "Purple";
+    if (belt == "Brown")
+        Belt = "Brown";
+}
+string Bjj::getBelt()
+{
+    return Belt;
 }
 
 void Bjj::Introduction_Player()
@@ -72,13 +106,19 @@ Bjj::~Bjj() // Deconstructor
 
 int main()
 {
-    Bjj player1 = Bjj("Pedro", "Blue", 25, 195);
+    Bjj player1 = Bjj("Pedro ", "Blue", 25, 195);
     player1.Introduction_Player();
 
     Bjj player2 = Bjj("Henrique", "Brown", 25, 185);
     player2.Introduction_Player();
-    player1.setName("JT");
-    std::cout << player1.getName() << " New Name" << std::endl;
+
+    player2.setBelt("Black");
+    std::cout << player2.getName() << " "
+              << "Promoted to " << player2.getBelt() << std::endl;
+
+    player1.Promotion();
+    player2.Promotion();
+
     // bool game = true;
     // while (game)
     // {
