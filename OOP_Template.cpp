@@ -18,7 +18,7 @@ private:
     int Weight; // In lbs
 public:
     vector<string> moves;
-    Bjj(string, string, int, int);
+    Bjj(string Name, string Belt, int Age, int Weight);
     ~Bjj();
     void Introduction_Player();
     vector<string> Make_Move(string);
@@ -38,6 +38,15 @@ public:
             std::cout << Name << "Not Promoted :(" << std::endl;
         }
     }
+};
+class Student : Bjj {
+    public:
+        string FavPositoin;
+        Student(string Name, string Belt, int Age, int Weight, string FavPositoin)
+            : Bjj(Name, Belt, Age, Weight){
+                  FavPositoin = FavPositoin;};
+        ~Student();
+
 };
 
 void Bjj::setName(string name)
@@ -118,6 +127,8 @@ int main()
 
     player1.Promotion();
     player2.Promotion();
+
+    Student p = Student("Pedro ", "Blue", 25, 195, "Close Guard");
 
     // bool game = true;
     // while (game)
