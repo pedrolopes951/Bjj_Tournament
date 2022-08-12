@@ -11,8 +11,8 @@ class AbstarctPlayer
 class Bjj : AbstarctPlayer
 {
 protected:
+    string Name; // Makes this property avaible to child classes
 private:
-    string Name;
     string Belt;
     int Age;
     int Weight; // In lbs
@@ -38,15 +38,6 @@ public:
             std::cout << Name << "Not Promoted :(" << std::endl;
         }
     }
-};
-class Student : Bjj {
-    public:
-        string FavPositoin;
-        Student(string Name, string Belt, int Age, int Weight, string FavPositoin)
-            : Bjj(Name, Belt, Age, Weight){
-                  FavPositoin = FavPositoin;};
-        ~Student();
-
 };
 
 void Bjj::setName(string name)
@@ -112,7 +103,31 @@ Bjj::Bjj(string name, string belt, int age, int weight) // Constructor
 Bjj::~Bjj() // Deconstructor
 {
 }
-
+class Student : public Bjj // Child Classes are private by default
+{
+public:
+    string FavPosition;
+    Student(string Name, string Belt, int Age, int Weight, string FavPosition)
+        : Bjj(Name, Belt, Age, Weight)
+    {
+        FavPosition = FavPosition;
+    };
+    void Call_Student();
+};
+class Master : public Bjj {
+    public:
+    string Speciality;
+    void preparemove(){
+        std::cout << Name << " is showing" << Speciality << "Move" << std::endl;
+    }
+    Master(string Name, string Belt, int Age, int Weight, string Speciality) : Bjj(Name, Belt,  Age, Weight){
+        Speciality =Speciality;
+    };
+};
+void Student::Call_Student()
+{
+    std::cout << Name << "favorite position is " << FavPosition << std::endl;
+}
 int main()
 {
     Bjj player1 = Bjj("Pedro ", "Blue", 25, 195);
@@ -129,25 +144,30 @@ int main()
     player2.Promotion();
 
     Student p = Student("Pedro ", "Blue", 25, 195, "Close Guard");
+    p.Call_Student();
+    p.Promotion();
+    Master h = Master("Helio ", "Black", 35, 175, "Open Guard");
+    h.preparemove();
+    h.Promotion();
 
-    // bool game = true;
-    // while (game)
-    // {
-    //     // Each player get to push one move to vector
-    //     // who get to first to 10 moves wins
-    //     string move;
-    //     vector<string> save_move;
-    //     std ::cin >> move;
-    //     std::cout << player1.Name << " make the move : " << move << std::endl;
-    //     save_move = player1.Make_Move(move);
-    //     game = player1.End_Game(save_move);
-    //     string move2;
-    //     vector<string> save_move2;
-    //     std ::cin >> move2;
-    //     std::cout << player2.Name << " make the move : " << move2 << std::endl;
-    //     save_move2 = player2.Make_Move(move2);
-    //     game = player2.End_Game(save_move2);
-    // }
+        // bool game = true;
+        // while (game)
+        // {
+        //     // Each player get to push one move to vector
+        //     // who get to first to 10 moves wins
+        //     string move;
+        //     vector<string> save_move;
+        //     std ::cin >> move;
+        //     std::cout << player1.Name << " make the move : " << move << std::endl;
+        //     save_move = player1.Make_Move(move);
+        //     game = player1.End_Game(save_move);
+        //     string move2;
+        //     vector<string> save_move2;
+        //     std ::cin >> move2;
+        //     std::cout << player2.Name << " make the move : " << move2 << std::endl;
+        //     save_move2 = player2.Make_Move(move2);
+        //     game = player2.End_Game(save_move2);
+        // }
 
-    return 0;
+        return 0;
 }
