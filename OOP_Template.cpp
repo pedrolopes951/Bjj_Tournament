@@ -28,6 +28,7 @@ public:
     void setBelt(string); // Set method
     string getBelt();
     void Promotion()
+
     {
         if (Belt == "Brown")
         {
@@ -37,6 +38,9 @@ public:
         {
             std::cout << Name << "Not Promoted :(" << std::endl;
         }
+    }
+    void Work(){
+        std::cout << Name << " is rolling" << std::endl;
     }
 };
 
@@ -149,6 +153,9 @@ int main()
     Master h = Master("Helio ", "Black", 35, 175, "Open Guard");
     h.preparemove();
     h.Promotion();
+
+    p.Work();
+    h.Work();
 
         // bool game = true;
         // while (game)

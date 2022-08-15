@@ -1,6 +1,8 @@
 #include <iostream>
-
-
+#include <vector>
+#include <string>
+using std::string;
+using std::vector;
 /* Problem: Build a Tournament bracket using classes proporties. It should be ask from the user to input the characteristic of each athelete, organize the
 matches by Division (age,weight and belt) and build a bracket system that displays the bracket at the terminal and ask to display the Division.
 
@@ -38,14 +40,20 @@ class Athlete: public Tournament
 protected:
 
 private:
+    string First_Name;
+    string Last_Name;
+    int Age;
+    int Weight;
+    string Belt;
 
 public:
-    Athlete(/* args */);
+    Athlete();
     ~Athlete();
 };
 
-Athlete::Athlete(/* args */)
+Athlete::Athlete()
 {
+    // create a cycle where the user input enter all the participant 
 }
 
 Athlete::~Athlete()
