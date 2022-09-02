@@ -39,7 +39,8 @@ public:
             std::cout << Name << "Not Promoted :(" << std::endl;
         }
     }
-    void Work(){
+    virtual void Work()
+    {
         std::cout << Name << " is rolling" << std::endl;
     }
 };
@@ -109,24 +110,37 @@ Bjj::~Bjj() // Deconstructor
 }
 class Student : public Bjj // Child Classes are private by default
 {
-public:
     string FavPosition;
+
+public:
     Student(string Name, string Belt, int Age, int Weight, string FavPosition)
         : Bjj(Name, Belt, Age, Weight)
     {
         FavPosition = FavPosition;
     };
     void Call_Student();
+    void Work()
+    {
+        std::cout << Name << " is rolling" << std::endl;
+    }
 };
-class Master : public Bjj {
-    public:
+class Master : public Bjj
+{
     string Speciality;
-    void preparemove(){
+
+public:
+    void preparemove()
+    {
         std::cout << Name << " is showing" << Speciality << "Move" << std::endl;
     }
-    Master(string Name, string Belt, int Age, int Weight, string Speciality) : Bjj(Name, Belt,  Age, Weight){
-        Speciality =Speciality;
+    Master(string Name, string Belt, int Age, int Weight, string Speciality) : Bjj(Name, Belt, Age, Weight)
+    {
+        Speciality = Speciality;
     };
+    // void Work()
+    // {
+    //     std::cout << Name << " is teching" << Speciality << std::endl;
+    // }
 };
 void Student::Call_Student()
 {
@@ -140,41 +154,29 @@ int main()
     Bjj player2 = Bjj("Henrique", "Brown", 25, 185);
     player2.Introduction_Player();
 
-    player2.setBelt("Black");
-    std::cout << player2.getName() << " "
-              << "Promoted to " << player2.getBelt() << std::endl;
+    // player2.setBelt("Black");
+    // std::cout << player2.getName() << " "
+    //           << "Promoted to " << player2.getBelt() << std::endl;
 
-    player1.Promotion();
-    player2.Promotion();
+    // player1.Promotion();
+    // player2.Promotion();
 
     Student p = Student("Pedro ", "Blue", 25, 195, "Close Guard");
-    p.Call_Student();
-    p.Promotion();
+    // p.Call_Student();
+    // p.Promotion();
     Master h = Master("Helio ", "Black", 35, 175, "Open Guard");
-    h.preparemove();
-    h.Promotion();
+    // h.preparemove();
+    // h.Promotion();
 
-    p.Work();
-    h.Work();
+    // p.Work();
+    // h.Work();
+    // Common use for parent class reference is uses to refer to a child class object;
+    Bjj *e1  = &p;
+    Bjj *e2 = &h;
 
-        // bool game = true;
-        // while (game)
-        // {
-        //     // Each player get to push one move to vector
-        //     // who get to first to 10 moves wins
-        //     string move;
-        //     vector<string> save_move;
-        //     std ::cin >> move;
-        //     std::cout << player1.Name << " make the move : " << move << std::endl;
-        //     save_move = player1.Make_Move(move);
-        //     game = player1.End_Game(save_move);
-        //     string move2;
-        //     vector<string> save_move2;
-        //     std ::cin >> move2;
-        //     std::cout << player2.Name << " make the move : " << move2 << std::endl;
-        //     save_move2 = player2.Make_Move(move2);
-        //     game = player2.End_Game(save_move2);
-        // }
+    e1->Work();
+    e2->Work();
 
-        return 0;
+
+    return 0;
 }
