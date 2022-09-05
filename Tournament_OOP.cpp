@@ -8,8 +8,24 @@
 #include <map>
 using std::string;
 using std::vector;
-
 class Tournament
+{
+private:
+    /* data */
+public:
+    Tournament(/* args */);
+    ~Tournament();
+};
+
+Tournament::Tournament(/* args */)
+{
+}
+
+Tournament::~Tournament()
+{
+}
+
+class Players : public Tournament
 {
 protected:
 private:
@@ -18,26 +34,51 @@ private:
     int m_Age;
     int m_Weight;
 public:
-    Tournament(string name, string belt, int age, int weight);
+    Players(string name, string belt, int age, int weight);
     void setName(string); // Set method
     string getName(); // Get method
     void setBelt(string);
     string getBelt();
     void setAge(int);
-    int geAge();
+    int getAge();
     void setWeight(int);
     int getWeight();
-    ~Tournament();
+    ~Players();
 };
-void Tournament::setName(string name)
+void Players::setName(string name)
 {
     m_Name = name;
 }
-string Tournament::getName()
+string Players::getName()
 {
     return m_Name;
 }
-Tournament::Tournament(string name, string belt, int age, int weight)
+void Players::setBelt(string belt)
+{
+    m_Belt = belt;
+}
+string Players::getBelt()
+{
+    return m_Belt;
+}
+void Players::setAge(int age)
+{
+    m_Age = age;
+}
+int Players::getAge()
+{
+    return m_Age;
+}
+void Players::setWeight(int weight)
+{
+    m_Weight = weight;
+}
+int Players::getWeight()
+{
+    return m_Weight;
+}
+
+Players::Players(string name, string belt, int age, int weight)
 {
     m_Name = name;
     m_Age = age;
@@ -45,12 +86,12 @@ Tournament::Tournament(string name, string belt, int age, int weight)
     m_Belt = belt;
 }
 
-Tournament::~Tournament()
+Players::~Players()
 {
 }
 
 
-vector<Tournament *> entry_of_atheletes(){
+vector<Players *> entry_of_atheletes(){
     std::ifstream inf {"Tournament.txt"};
     string line;
     string key;
@@ -59,13 +100,13 @@ vector<Tournament *> entry_of_atheletes(){
     vector<string> belt;
     vector<int> age{};
     vector<int> weight{};
-    vector<Tournament *> players;
+    vector<Players *> players_list;
     // inf return 0 if we reach end of file 
     // If we couldn't open the output file stream for reading
     if (!inf)
     {
         // Print an error and exit
-        std::cerr << "Uh oh, Tournament.txt could not be opened for reading!\n";
+        std::cerr << "Uh oh, Players.txt could not be opened for reading!\n";
     }
     
     while (getline(inf,line))
@@ -102,13 +143,25 @@ vector<Tournament *> entry_of_atheletes(){
     }    
     for (int i = 0; i <= name.size()-1; i++)
     {    
-        Tournament *participant = new Tournament(name[i], belt[i], age[i], weight[i]);
-        players.push_back(participant);
+        Players *participant = new Players(name[i], belt[i], age[i], weight[i]);
+        players_list.push_back(participant);
     }
-    for (int i = 0; i < players.size(); i++)
-    {
-        std::cout << players[i]->getName() << " " << std::endl;
-    }
-    return players;
+    
+    return players_list;
 }
 
+void present_players (vector<Players*> players_list)
+{
+    std::cout << 
+    "This is the list of participant for this tournament : \n" ;
+    for (int i = 0; i < players_list.size(); i++)
+    {
+        std::cout << "Player : " << i+1 << "\n"<< std::endl; ;
+        std::cout << "Name : " <<  players_list.at(i)->getName() << "\n" ;
+        std::cout << "Belt : " <<  players_list.at(i)->getBelt() << "\n"; 
+        std::cout << "Age : " <<  players_list.at(i)->getAge() << "\n" ;
+        std::cout << "Weight : " <<  players_list.at(i)->getWeight() << "\n";
+        std::cout << "\n" << std::endl;
+
+    }
+}
