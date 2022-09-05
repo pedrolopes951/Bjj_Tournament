@@ -1,27 +1,13 @@
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include <ios>    //used to get stream size
 #include <limits> //used to get numeric limits
 #include <vector>
 #include <string>
+#include <map>
 using std::string;
 using std::vector;
-/* Problem: Build a Tournament bracket using classes proporties. It should ask the user to input the characteristic of each athelete, organize the
-matches by Division (age,weight and belt) and build a bracket system that displays the bracket at the terminal and ask to display the Division.
-
-Conditions:
-    No more than 6 players for now
-
-Future aplication :
-    - Search data from file first then maybe use a postgres database, instead of hard typing every thing
-    - Given the winner the braket should update the division bracket and display the new matches, until a final winner is presented
-
-
-*/
-
-// Implement class tournament to build the tournament
-// Ask for input of participants on constructor class
-// It should ask for input from client of FirstName, Last Name, Age, Belt and Weight e.g = "PEDRO, LOPES, 25, blue, 88"
-// When it is done client should write "end" and there should be no more objets of this class created
 
 class Tournament
 {
@@ -41,7 +27,6 @@ public:
     int geAge();
     void setWeight(int);
     int getWeight();
-    void entry_of_atheletes(vector<Tournament*>); // Method to ask for atheltes info
     ~Tournament();
 };
 void Tournament::setName(string name)
@@ -62,5 +47,68 @@ Tournament::Tournament(string name, string belt, int age, int weight)
 
 Tournament::~Tournament()
 {
+}
+
+
+vector<Tournament *> entry_of_atheletes(){
+    std::ifstream inf {"Tournament.txt"};
+    string line;
+    string key;
+    string value;
+    vector<string> name;
+    vector<string> belt;
+    vector<int> age{};
+    vector<int> weight{};
+    vector<Tournament *> players;
+    // inf return 0 if we reach end of file 
+    // If we couldn't open the output file stream for reading
+    if (!inf)
+    {
+        // Print an error and exit
+        std::cerr << "Uh oh, Tournament.txt could not be opened for reading!\n";
+    }
+    
+    while (getline(inf,line))
+    {
+        if (line.empty() || line[0] == '#')
+       {
+           // skip blank or comment lines
+       }
+        else
+       {
+           std::istringstream ss(line);
+           std::string key, value;
+           // read first string (key)
+           ss >> key;
+           // read rest of line (value)
+           getline(ss, value);
+           if (key== "Name")
+            {
+                name.push_back(value);
+            }
+           if (key == "Belt")
+            {
+                belt.push_back(value);
+            }
+           if (key== "Age")
+            {
+                age.push_back(stoi(value));
+            }
+            if (key == "Weight")
+            {
+                weight.push_back(stoi(value));
+            }       
+       }
+    }    
+    for (int i = 0; i <= name.size()-1; i++)
+    {    
+        Tournament *participant = new Tournament(name[i], belt[i], age[i], weight[i]);
+        players.push_back(participant);
+    }
+    for (int i = 0; i < players.size(); i++)
+    {
+        std::cout << players[i]->getName() << " " << std::endl;
+    }
+    return players;
 }
 
