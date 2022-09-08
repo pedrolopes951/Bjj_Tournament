@@ -8,6 +8,8 @@ Conditions:
     No more than 6 players for now
 
 Future aplication :
+    - Print Brackes with the match for each division and weight category
+    - Handle the user input more gracefully 
     - Use a postgres database, instead of hard typing every thing
     - Given the winner the braket should update the division bracket and display the new matches, until a final winner is presented
 
@@ -15,8 +17,6 @@ Future aplication :
 Implement :
     - Implement class tournament to build the tournament
     - Read from input file the data for participants
-    - Use template for each entrie 
-    - Create Unit testing to test the code 
 */
 #include "Tournament_OOP.cpp"
 
