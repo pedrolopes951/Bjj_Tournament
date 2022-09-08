@@ -4,6 +4,41 @@ Age 25
 Weight 88
 
 Name Henrique 
-Belt Brown 
+Belt Blue 
 Age 25
 Weight 84
+
+Name João 
+Belt Blue 
+Age 27
+Weight 85
+
+Name David 
+Belt Blue 
+Age 27
+Weight 75
+
+Name Manuel 
+Belt Blue 
+Age 21
+Weight 105
+
+Name André
+Belt Blue 
+Age 25
+Weight 110
+
+Name Nuno 
+Belt Blue 
+Age 21
+Weight 68
+
+Name Omri 
+Belt Blue
+Age 25
+Weight 88
+
+Name André V.
+Belt Blue 
+Age 22
+Weight 65
