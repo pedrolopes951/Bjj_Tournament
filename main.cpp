@@ -18,7 +18,7 @@ Implement :
     - Implement class tournament to build the tournament
     - Read from input file the data for participants
 */
-#include "Tournament_OOP.cpp"
+#include "Tournament.cpp"
 
 /* Function Declaration- Function prototypes declaring each functino used in program*/
 vector<Players *> entry_of_atheletes();
